@@ -1,26 +1,33 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Unbounded, Space_Mono, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const unbounded = Unbounded({
+  variable: "--font-unbounded",
   subsets: ["latin"],
+  weight: ["300", "400", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
   subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  weight: ["200", "300", "400"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
-  title: "Ahmed Messaad",
+  title: "Zaid Saad — Full Stack Developer",
   description:
-    "AI/ML Researcher specializing in Medical Imaging and Deep Learning.",
+    "Flutter & web developer. Firebase-backed systems. Real products deployed and used — built from M'sila, Algeria.",
   icons: {
-    icon: [
-      { url: "/ahmed-icon1.png", type: "image/png", sizes: "120x120" },
-    ],
-    apple: "/ahmed-icon1.png",
+    icon: [{ url: "/favicon.ico", type: "image/x-icon" }],
   },
 };
 
@@ -31,15 +38,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* Force favicon override */}
-        <link rel="icon" href="/ahmed-icon1.png" type="image/png" sizes="120x120" />
-        <link rel="shortcut icon" href="/ahmed-icon1.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/ahmed-icon1.png" />
-        <meta name="theme-color" content="#000000" />
-      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${unbounded.variable} ${spaceMono.variable} ${dmSans.variable} antialiased`}
       >
         {children}
       </body>
