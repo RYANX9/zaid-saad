@@ -1,78 +1,110 @@
-// =============================================================================
-// DATA.TS - Project Data & Type Definitions
-// =============================================================================
-
 export interface Project {
   id: string;
-  name: string;
-  context: string;
-  year: string;
+  idx: string;
+  title: string;
   description: string;
-  tech: string[];
-  link: string;
-  linkText: string;
-  image: string;
+  tags: string[];
+  link: string | null;
+  linkLabel: string;
 }
+
+export interface Skill {
+  name: string;
+  width: number; // 0-1
+  tag: string;
+}
+
+export interface SocialLink {
+  name: string;
+  url: string;
+  label: string;
+}
+
+export const personalInfo = {
+  name: "Zaid Saad",
+  tagline: "Full Stack Developer · Algeria",
+  heroDesc:
+    "Flutter & web developer. Firebase-backed systems. Building real, deployed products from M'sila — mobile, web, and data-driven.",
+  email: "saad.zaid@univ-msila.dz",
+  phone: "+213 552 896 422",
+  whatsapp: "https://wa.me/213552896422",
+  github: "https://github.com/saadzayd",
+  linkedin: "#",
+  photo: "/pic.png",
+  available: true,
+  year: 2025,
+};
+
+export const stats = [
+  { num: "3", label: "Live Products" },
+  { num: "5+", label: "Core Technologies" },
+  { num: "M.Sc", label: "Computer Science · 2025" },
+];
+
+export const aboutContent = {
+  headline: "Built to Last.",
+  paragraphs: [
+    "I build applications that hold — across <strong>mobile, web, and cloud</strong> — without compromising on performance or design intent. Deployed systems. Real users.",
+    "M.Sc in Computer Science, Business Intelligence & Optimization, University of M'sila. The academic work informs every architectural decision I make.",
+    "Based in Algeria. Available for freelance, remote, and full-time roles. Direct to work with.",
+  ],
+};
+
+export const skills: Skill[] = [
+  { name: "Flutter & Dart", width: 0.65, tag: "Active" },
+  { name: "Firebase & GCP", width: 0.78, tag: "Solid" },
+  { name: "HTML / CSS / JS", width: 0.68, tag: "Active" },
+  { name: "Power BI & Analytics", width: 0.72, tag: "Solid" },
+  { name: "Python & Data Science", width: 0.50, tag: "Building" },
+];
 
 export const projects: Project[] = [
   {
-    id: "treatment-drl",
-    name: "Medical Treatment DRL",
-    context: "Sequential Decision-Making Research",
-    year: "2025",
+    id: "remp",
+    idx: "01",
+    title: "Smart Real Estate Platform",
     description:
-      "ICU treatment timing system trained on MIMIC-III data. A2C agent achieved 99.5% clinical appropriateness with +76–145 reward improvement over baselines. Implemented rule-based safety filter boosting PPO/DQN appropriateness by 40 points. Custom 26D Gym environment with temporal lab trends and treatment effect simulation.",
-    tech: ["Stable-Baselines3", "Gym", "NumPy", "Pandas", "MIMIC-III"],
-    link: "https://github.com/RYANX9/medical-treatment-drl/",
-    linkText: "View Code",
-    image: "/clinrl.jpeg",
+      "Multi-role authenticated system connecting agencies, contractors, and engineers. Offline-capable with local data sync — built for real network conditions. Live and deployed.",
+    tags: ["Flutter", "Firebase", "Google Cloud"],
+    link: "https://remp-8b15c.web.app/",
+    linkLabel: "Live",
   },
   {
-    id: "airm",
-    name: "AIRM Brain Tumor System",
-    context: "Clinical AI Research",
-    year: "2024",
+    id: "urtec",
+    idx: "02",
+    title: "URTEC Bouma Web App",
     description:
-      "Clinical-grade diagnostic system achieving 99% four-class tumor classification with radiologist-validated interface. End-to-end DICOM pipeline development investigating optimal preprocessing strategies for limited medical imaging datasets. Deployment-ready architecture with clinical workflow integration.",
-    tech: ["EfficientNet-B7", "PyDICOM", "PyQt5", "SQL"],
-    link: "https://youtu.be/2OeqBKF3X_A",
-    linkText: "Watch Demo",
-    image: "/brain.jpg",
+      "Client intake and service portal for a real estate company. Responsive, bilingual-ready, Cloudinary-optimized. Production deployment handling real client-company workflows daily.",
+    tags: ["HTML/CSS/JS", "Firebase", "Cloudinary"],
+    link: "https://urtec-26aab.web.app/",
+    linkLabel: "Live",
   },
   {
-    id: "hemavision",
-    name: "HemaVision",
-    context: "Medical Automation",
-    year: "2023–2024",
+    id: "ewallet",
+    idx: "03",
+    title: "Data-Driven E-Wallet",
     description:
-      "Automated hematology platform achieving 97% multi-class blood cell classification. Reduced diagnostic time from 45 minutes to 3 minutes through optimized detection pipeline. Research investigating efficient segmentation architectures for microscopy imaging in clinical workflows.",
-    tech: ["YOLOv8", "U-Net", "OpenCV", "PyTorch"],
-    link: "https://youtu.be/YxhA877Wyn0",
-    linkText: "Watch Demo",
-    image: "/blood.jpg",
+      "Institutional e-wallet built for companies and universities. Real-time analytics layer tracks usage patterns at scale — designed for operations teams, not just end users.",
+    tags: ["HTML/CSS/JS", "Firebase", "Analytics"],
+    link: null,
+    linkLabel: "Private",
   },
   {
-    id: "healthcost",
-    name: "Healthcare Cost Prediction",
-    context: "Deep Learning Methodology",
-    year: "2024",
+    id: "carrental",
+    idx: "04",
+    title: "Car Rental & Parts System",
     description:
-      "Conv1D neural network achieving R² = 0.88 for insurance cost forecasting. Feature engineering with SHAP analysis identified key cost drivers. Systematic ablation study investigating optimal temporal convolution strategies for healthcare prediction tasks.",
-    tech: ["Conv1D", "SHAP", "Scikit-learn", "Plotly"],
-    link: "https://github.com/RYANX9/healthcare-cost-prediction",
-    linkText: "View Code",
-    image: "/healthcarecost.png",
-  },
-  {
-    id: "mydailyhealth",
-    name: "My Daily Health",
-    context: "Research Thesis",
-    year: "2023",
-    description:
-      "Multi-disease diagnostic platform with 90-99% accuracy across five disease domains. Systematic comparative evaluation of 12 deep learning architectures using stratified cross-validation. Transfer learning investigation for multi-domain medical classification.",
-    tech: ["TensorFlow", "ResNet", "EfficientNet", "Flask"],
-    link: "https://youtu.be/kh7WBjNPpEM",
-    linkText: "Watch Demo",
-    image: "/daily.png",
+      "Full management system for vehicle sales, rentals, and parts inventory. Real-time cloud sync across devices — covers the complete operational workflow from a single cross-platform app.",
+    tags: ["Flutter", "Firebase", "Cloud Sync"],
+    link: null,
+    linkLabel: "Private",
   },
 ];
+
+export const socialLinks: SocialLink[] = [
+  { name: "GitHub", url: "https://github.com/saadzayd", label: "↗" },
+  { name: "WhatsApp — +213 552 896 422", url: "https://wa.me/213552896422", label: "↗" },
+  { name: "LinkedIn", url: "#", label: "↗" },
+];
+
+export const marqueeText = "Flutter · Firebase · Cloud · Analytics · ";
