@@ -111,7 +111,7 @@ export default function HomePage() {
   const isVisible = (id: string) => visibleSections.has(id);
 
   return (
-    <main className="bg-black text-white min-h-screen relative transition-colors duration-500">
+    <main className="bg-[var(--black)] text-[var(--white)] min-h-screen relative transition-colors duration-500">
       {/* Custom Cursor */}
       <div
         id="cursor"
@@ -132,12 +132,12 @@ export default function HomePage() {
       <nav
         className={`fixed top-0 left-0 right-0 z-[500] flex items-center justify-between px-7 md:px-[52px] transition-all duration-300 ${
           navScrolled
-            ? "bg-black py-4 border-b border-white/[0.06]"
+            ? "bg-[var(--black)] py-4 border-b border-[var(--white)]/[0.06]"
             : "py-7"
         }`}
       >
         <span
-          className="font-[family-name:var(--font-space-mono)] text-[11px] tracking-[0.2em] uppercase text-white"
+          className="font-[family-name:var(--font-space-mono)] text-[11px] tracking-[0.2em] uppercase text-[var(--white)]"
         >
           Z.S — Portfolio
         </span>
@@ -146,7 +146,7 @@ export default function HomePage() {
             <li key={item}>
               <a
                 href={`#${item.toLowerCase()}`}
-                className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.18em] uppercase text-[#999] hover:text-white transition-colors duration-200"
+                className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.18em] uppercase text-[var(--gray)] hover:text-[var(--white)] transition-colors duration-200"
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
               >
@@ -156,10 +156,9 @@ export default function HomePage() {
           ))}
         </ul>
         
-        {/* Switch replacing Admin Button */}
         <button
           onClick={toggleTheme}
-          className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.18em] uppercase text-[#999] hover:text-white transition-colors duration-200 cursor-pointer"
+          className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.18em] uppercase text-[var(--gray)] hover:text-[var(--white)] transition-colors duration-200 cursor-pointer"
           onMouseEnter={() => setCursorHover(true)}
           onMouseLeave={() => setCursorHover(false)}
         >
