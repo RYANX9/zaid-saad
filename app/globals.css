@@ -11,6 +11,14 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Light Mode Variables  */
+.light {
+  --black: #ffffff;
+  --white: #000000;
+  --gray: #666666;
+  --dim: rgba(0,0,0,0.06);
+}
+
 @theme inline {
   --color-background: var(--black);
   --color-foreground: var(--white);
@@ -23,6 +31,7 @@ body {
   color: var(--white);
   font-family: var(--B);
   overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease; /* Smooth transition */
 }
 
 a {
