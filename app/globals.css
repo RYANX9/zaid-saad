@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --black: #000000;
-  --white: #ffffff;
-  --gray: #999999;
-  --dim: rgba(255,255,255,0.06);
+  --black: #0a0908;
+  --white: #f6f1e9;
+  --gray: #9c948a;
+  --dim: rgba(246,241,233,0.07);
+  --accent: #ff6b45;
+  --accent-ink: #1a0f0a;
   --D: 'Unbounded', sans-serif;
   --M: 'Space Mono', monospace;
   --B: 'DM Sans', sans-serif;
@@ -13,10 +15,10 @@
 
 /* Light Mode Variables  */
 .light {
-  --black: #ffffff;
-  --white: #000000;
-  --gray: #666666;
-  --dim: rgba(0,0,0,0.06);
+  --black: #f4ede0;
+  --white: #191410;
+  --gray: #6e6459;
+  --dim: rgba(25,20,16,0.07);
 }
 
 @theme inline {
