@@ -31,7 +31,16 @@ body {
   color: var(--white);
   font-family: var(--B);
   overflow-x: hidden;
-  transition: background 0.4s ease, color 0.4s ease; /* Smooth transition */
+}
+
+/* Theme toggle: every element that reads a theme var fades together.
+   Utilities like transition-colors / transition-all set their own
+   transition-property + duration on the class itself, which has higher
+   specificity than this rule and simply overrides it — so hover/scroll
+   effects keep their own timing untouched. */
+*, *::before, *::after {
+  transition: background-color 0.5s var(--ease), color 0.5s var(--ease),
+    border-color 0.5s var(--ease), fill 0.5s var(--ease), stroke 0.5s var(--ease);
 }
 
 a {
