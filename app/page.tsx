@@ -111,7 +111,7 @@ export default function HomePage() {
   const isVisible = (id: string) => visibleSections.has(id);
 
   return (
-    <main className="bg-[var(--black)] text-[var(--white)] min-h-screen relative transition-colors duration-500">
+    <main className="bg-[var(--black)] text-[var(--white)] min-h-screen relative">
       {/* Custom Cursor */}
       <div
         id="cursor"
