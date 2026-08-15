@@ -192,13 +192,13 @@ export default function HomePage() {
             className="absolute inset-0 z-[2]"
             style={{
               background:
-                "linear-gradient(95deg, #000 0%, transparent 30%)",
+                "linear-gradient(95deg, var(--black) 0%, transparent 30%)",
             }}
           />
           <div
             className="absolute bottom-0 left-0 right-0 h-[45%] z-[2]"
             style={{
-              background: "linear-gradient(transparent, #000)",
+              background: "linear-gradient(transparent, var(--black))",
             }}
           />
           <Image
@@ -220,12 +220,12 @@ export default function HomePage() {
               : "opacity-0 translate-y-4"
           }`}
         >
-          <div className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.22em] uppercase text-[#999] mb-7 flex items-center gap-[18px]">
-            <span className="block w-9 h-px bg-[#999]" />
+          <div className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.22em] uppercase text-[var(--gray)] mb-7 flex items-center gap-[18px]">
+            <span className="block w-9 h-px bg-[var(--gray)]" />
             {personalInfo.tagline}
           </div>
           <h1
-            className="font-[family-name:var(--font-unbounded)] font-light leading-[0.92] tracking-[-0.03em] uppercase text-white mb-[52px]"
+            className="font-[family-name:var(--font-unbounded)] font-light leading-[0.92] tracking-[-0.03em] uppercase text-[var(--white)] mb-[52px]"
             style={{ fontSize: "clamp(80px, 14.5vw, 210px)" }}
           >
             Zaid
@@ -233,13 +233,13 @@ export default function HomePage() {
             Saad
           </h1>
           <div className="flex items-end justify-between gap-12 flex-wrap">
-            <p className="text-[14px] font-light leading-[1.8] text-[#999] max-w-[340px]">
+            <p className="text-[14px] font-light leading-[1.8] text-[var(--gray)] max-w-[340px]">
               {personalInfo.heroDesc}
             </p>
             <div className="flex gap-3.5">
               <a
                 href="#work"
-                className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.16em] uppercase px-7 py-3.5 rounded-full border border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-250"
+                className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.16em] uppercase px-7 py-3.5 rounded-full border border-[var(--white)] text-[var(--white)] bg-transparent hover:bg-[var(--white)] hover:text-[var(--black)] transition-all duration-250"
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
               >
@@ -247,7 +247,7 @@ export default function HomePage() {
               </a>
               <a
                 href="#contact"
-                className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.16em] uppercase px-7 py-3.5 rounded-full border border-[#333] text-[#999] bg-transparent hover:border-white hover:text-white transition-all duration-250"
+                className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.16em] uppercase px-7 py-3.5 rounded-full border border-[var(--gray)]/30 text-[var(--gray)] bg-transparent hover:border-[var(--white)] hover:text-[var(--white)] transition-all duration-250"
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
               >
@@ -259,20 +259,20 @@ export default function HomePage() {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-9 left-1/2 -translate-x-1/2 z-[3] flex flex-col items-center gap-2">
-          <div className="w-px h-[52px] bg-white/15 relative overflow-hidden">
+          <div className="w-px h-[52px] bg-[var(--white)]/15 relative overflow-hidden">
             <div
-              className="absolute top-[-100%] w-full h-full bg-white animate-[drip_2s_cubic-bezier(0.22,1,0.36,1)_infinite]"
+              className="absolute top-[-100%] w-full h-full bg-[var(--white)] animate-[drip_2s_cubic-bezier(0.22,1,0.36,1)_infinite]"
             />
           </div>
         </div>
       </section>
 
       {/* ── STATS BAND ── */}
-      <div ref={bandRef} className="grid grid-cols-1 md:grid-cols-3 border-b border-white/[0.06]">
+      <div ref={bandRef} className="grid grid-cols-1 md:grid-cols-3 border-b border-[var(--white)]/[0.06]">
         {stats.map((s, i) => (
           <div
             key={s.label}
-            className={`px-7 md:px-[52px] py-14 border-r border-white/[0.06] last:border-r-0 transition-all duration-700 ${
+            className={`px-7 md:px-[52px] py-14 border-r border-[var(--white)]/[0.06] last:border-r-0 transition-all duration-700 ${
               bandVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-3"
@@ -280,12 +280,12 @@ export default function HomePage() {
             style={{ transitionDelay: `${i * 0.1}s` }}
           >
             <span
-              className="font-[family-name:var(--font-unbounded)] font-light leading-none tracking-[-0.03em] text-white block mb-2.5"
+              className="font-[family-name:var(--font-unbounded)] font-light leading-none tracking-[-0.03em] text-[var(--white)] block mb-2.5"
               style={{ fontSize: "68px" }}
             >
               {s.num}
             </span>
-            <span className="font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.18em] uppercase text-[#999]">
+            <span className="font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.18em] uppercase text-[var(--gray)]">
               {s.label}
             </span>
           </div>
@@ -297,13 +297,13 @@ export default function HomePage() {
         <div
           ref={registerRef("about-tag")}
           data-fade="about-tag"
-          className={`font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.22em] uppercase text-[#999] mb-16 flex items-center gap-[18px] transition-all duration-[800ms] ${
+          className={`font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.22em] uppercase text-[var(--gray)] mb-16 flex items-center gap-[18px] transition-all duration-[800ms] ${
             isVisible("about-tag")
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-4"
           }`}
         >
-          <span className="block w-7 h-px bg-[#999]" />
+          <span className="block w-7 h-px bg-[var(--gray)]" />
           01 — About
         </div>
 
@@ -318,7 +318,7 @@ export default function HomePage() {
             }`}
           >
             <h2
-              className="font-[family-name:var(--font-unbounded)] font-light leading-[1.0] tracking-[-0.025em] uppercase text-white mb-10"
+              className="font-[family-name:var(--font-unbounded)] font-light leading-[1.0] tracking-[-0.025em] uppercase text-[var(--white)] mb-10"
               style={{ fontSize: "clamp(36px, 5vw, 72px)" }}
             >
               Built to
@@ -328,7 +328,7 @@ export default function HomePage() {
             {aboutContent.paragraphs.map((p, i) => (
               <p
                 key={i}
-                className="text-[15px] font-light leading-[1.85] text-[#999] mb-[18px]"
+                className="text-[15px] font-light leading-[1.85] text-[var(--gray)] mb-[18px]"
                 dangerouslySetInnerHTML={{ __html: p }}
               />
             ))}
@@ -343,18 +343,18 @@ export default function HomePage() {
                 : "opacity-0 translate-y-4"
             }`}
           >
-            <div ref={skillsRef} className="border-t border-white/[0.06] mt-2">
+            <div ref={skillsRef} className="border-t border-[var(--white)]/[0.06] mt-2">
               {skills.map((sk) => (
                 <div
                   key={sk.name}
-                  className="grid grid-cols-[1fr_1fr_auto] gap-5 items-center py-[18px] border-b border-white/[0.06]"
+                  className="grid grid-cols-[1fr_1fr_auto] gap-5 items-center py-[18px] border-b border-[var(--white)]/[0.06]"
                 >
-                  <span className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.1em] uppercase text-white">
+                  <span className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.1em] uppercase text-[var(--white)]">
                     {sk.name}
                   </span>
-                  <div className="h-px bg-white/10 relative overflow-hidden">
+                  <div className="h-px bg-[var(--white)]/10 relative overflow-hidden">
                     <div
-                      className="absolute top-0 left-0 h-full bg-white origin-left transition-transform duration-[1400ms]"
+                      className="absolute top-0 left-0 h-full bg-[var(--white)] origin-left transition-transform duration-[1400ms]"
                       style={{
                         transform: `scaleX(${skillsVisible ? sk.width : 0})`,
                         transitionTimingFunction:
@@ -362,7 +362,7 @@ export default function HomePage() {
                       }}
                     />
                   </div>
-                  <span className="font-[family-name:var(--font-space-mono)] text-[8px] tracking-[0.14em] uppercase text-[#999] whitespace-nowrap">
+                  <span className="font-[family-name:var(--font-space-mono)] text-[8px] tracking-[0.14em] uppercase text-[var(--gray)] whitespace-nowrap">
                     {sk.tag}
                   </span>
                 </div>
@@ -373,12 +373,12 @@ export default function HomePage() {
       </section>
 
       {/* ── MARQUEE ── */}
-      <div className="border-t border-b border-white/[0.06] py-8 overflow-hidden relative">
+      <div className="border-t border-b border-[var(--white)]/[0.06] py-8 overflow-hidden relative">
         <div className="flex gap-0 whitespace-nowrap animate-[march_22s_linear_infinite]">
           {[0, 1].map((i) => (
             <span
               key={i}
-              className="font-[family-name:var(--font-unbounded)] font-light tracking-[-0.02em] uppercase text-white/[0.04] pr-20 leading-none"
+              className="font-[family-name:var(--font-unbounded)] font-light tracking-[-0.02em] uppercase text-[var(--white)]/[0.04] pr-20 leading-none"
               style={{ fontSize: "11vw" }}
             >
               {marqueeText}
@@ -394,17 +394,17 @@ export default function HomePage() {
           <div
             ref={registerRef("work-tag")}
             data-fade="work-tag"
-            className={`font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.22em] uppercase text-[#999] mb-16 flex items-center gap-[18px] transition-all duration-[800ms] ${
+            className={`font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.22em] uppercase text-[var(--gray)] mb-16 flex items-center gap-[18px] transition-all duration-[800ms] ${
               isVisible("work-tag")
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4"
             }`}
           >
-            <span className="block w-7 h-px bg-[#999]" />
+            <span className="block w-7 h-px bg-[var(--gray)]" />
             02 — Selected Work
           </div>
 
-          <div className="border-t border-white/[0.06]">
+          <div className="border-t border-[var(--white)]/[0.06]">
             {projects.map((p, i) => {
               const Wrapper = p.link ? "a" : "div";
               const wrapperProps = p.link
@@ -419,7 +419,7 @@ export default function HomePage() {
                 <Wrapper
                   key={p.id}
                   {...wrapperProps}
-                  className={`grid grid-cols-1 md:grid-cols-[64px_1fr_280px_120px] gap-10 items-start py-11 border-b border-white/[0.06] relative group cursor-none transition-all duration-[800ms] ${
+                  className={`grid grid-cols-1 md:grid-cols-[64px_1fr_280px_120px] gap-10 items-start py-11 border-b border-[var(--white)]/[0.06] relative group cursor-none transition-all duration-[800ms] ${
                     isVisible(`work-${i}`)
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-4"
@@ -429,18 +429,18 @@ export default function HomePage() {
                   onMouseEnter={() => setCursorHover(true)}
                   onMouseLeave={() => setCursorHover(false)}
                 >
-                  <div className="absolute inset-0 -mx-7 md:-mx-[52px] bg-white/[0.025] opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none" />
-                  <span className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.1em] text-[#999] pt-1 relative z-10 group-hover:text-white transition-colors">
+                  <div className="absolute inset-0 -mx-7 md:-mx-[52px] bg-[var(--white)]/[0.025] opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none" />
+                  <span className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.1em] text-[var(--gray)] pt-1 relative z-10 group-hover:text-[var(--white)] transition-colors">
                     {p.idx}
                   </span>
                   <div className="relative z-10">
                     <div
-                      className="font-[family-name:var(--font-unbounded)] font-light leading-[1.0] tracking-[-0.02em] uppercase text-white mb-3.5 transition-all duration-300 group-hover:tracking-[-0.01em]"
+                      className="font-[family-name:var(--font-unbounded)] font-light leading-[1.0] tracking-[-0.02em] uppercase text-[var(--white)] mb-3.5 transition-all duration-300 group-hover:tracking-[-0.01em]"
                       style={{ fontSize: "clamp(20px, 2.6vw, 38px)" }}
                     >
                       {p.title}
                     </div>
-                    <p className="text-[13px] font-light leading-[1.75] text-[#999] max-w-[420px]">
+                    <p className="text-[13px] font-light leading-[1.75] text-[var(--gray)] max-w-[420px]">
                       {p.description}
                     </p>
                   </div>
@@ -448,7 +448,7 @@ export default function HomePage() {
                     {p.tags.map((t) => (
                       <span
                         key={t}
-                        className="font-[family-name:var(--font-space-mono)] text-[8px] tracking-[0.14em] uppercase text-[#999] border border-white/[0.14] rounded-full px-3 py-[5px] w-fit transition-all duration-200 group-hover:border-white/[0.35] group-hover:text-white"
+                        className="font-[family-name:var(--font-space-mono)] text-[8px] tracking-[0.14em] uppercase text-[var(--gray)] border border-[var(--white)]/[0.14] rounded-full px-3 py-[5px] w-fit transition-all duration-200 group-hover:border-[var(--white)]/[0.35] group-hover:text-[var(--white)]"
                       >
                         {t}
                       </span>
@@ -457,8 +457,8 @@ export default function HomePage() {
                   <div
                     className={`font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.16em] uppercase pt-1 flex items-center gap-2 relative z-10 transition-all duration-200 ${
                       p.link
-                        ? "text-[#999] group-hover:text-white"
-                        : "text-[#999]/30"
+                        ? "text-[var(--gray)] group-hover:text-[var(--white)]"
+                        : "text-[var(--gray)]/30"
                     }`}
                   >
                     {p.linkLabel}
@@ -481,7 +481,7 @@ export default function HomePage() {
           <h2
             ref={registerRef("contact-head")}
             data-fade="contact-head"
-            className={`font-[family-name:var(--font-unbounded)] font-light leading-[0.92] tracking-[-0.03em] uppercase text-white mb-[100px] transition-all duration-[800ms] ${
+            className={`font-[family-name:var(--font-unbounded)] font-light leading-[0.92] tracking-[-0.03em] uppercase text-[var(--white)] mb-[100px] transition-all duration-[800ms] ${
               isVisible("contact-head")
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4"
@@ -493,7 +493,7 @@ export default function HomePage() {
             Build.
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-20 border-t border-white/[0.06] pt-[60px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-20 border-t border-[var(--white)]/[0.06] pt-[60px]">
             <div
               ref={registerRef("contact-left")}
               data-fade="contact-left"
@@ -503,19 +503,19 @@ export default function HomePage() {
                   : "opacity-0 translate-y-4"
               }`}
             >
-              <p className="font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[#999] mb-5">
+              <p className="font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[var(--gray)] mb-5">
                 Direct Contact
               </p>
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="font-[family-name:var(--font-unbounded)] font-light tracking-[-0.01em] text-white border-b border-white/20 pb-1 inline-block hover:border-white transition-colors duration-200"
+                className="font-[family-name:var(--font-unbounded)] font-light tracking-[-0.01em] text-[var(--white)] border-b border-[var(--white)]/20 pb-1 inline-block hover:border-[var(--white)] transition-colors duration-200"
                 style={{ fontSize: "clamp(14px, 1.8vw, 22px)" }}
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
               >
                 {personalInfo.email}
               </a>
-              <p className="mt-7 text-[13px] font-light text-[#999] leading-[1.85] max-w-[300px]">
+              <p className="mt-7 text-[13px] font-light text-[var(--gray)] leading-[1.85] max-w-[300px]">
                 Open to freelance projects, remote roles, and full-time
                 positions. Fast response. Direct communication. Available now.
               </p>
@@ -530,7 +530,7 @@ export default function HomePage() {
                   : "opacity-0 translate-y-4"
               }`}
             >
-              <p className="font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[#999] mb-5">
+              <p className="font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[var(--gray)] mb-5">
                 Channels
               </p>
               <div className="flex flex-col">
@@ -540,14 +540,14 @@ export default function HomePage() {
                     href={link.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex justify-between items-center py-[18px] border-b border-white/[0.06] group hover:pl-2.5 transition-all duration-200"
+                    className="flex justify-between items-center py-[18px] border-b border-[var(--white)]/[0.06] group hover:pl-2.5 transition-all duration-200"
                     onMouseEnter={() => setCursorHover(true)}
                     onMouseLeave={() => setCursorHover(false)}
                   >
-                    <span className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase text-white">
+                    <span className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase text-[var(--white)]">
                       {link.name}
                     </span>
-                    <span className="text-[14px] text-[#999] transition-all duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white">
+                    <span className="text-[14px] text-[var(--gray)] transition-all duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[var(--white)]">
                       {link.label}
                     </span>
                   </a>
@@ -559,14 +559,14 @@ export default function HomePage() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="px-7 md:px-[52px] py-7 border-t border-white/[0.06] flex justify-between items-center flex-wrap gap-3">
-        <span className="font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.14em] uppercase text-[#999]">
+      <footer className="px-7 md:px-[52px] py-7 border-t border-[var(--white)]/[0.06] flex justify-between items-center flex-wrap gap-3">
+        <span className="font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.14em] uppercase text-[var(--gray)]">
           © {personalInfo.year} {personalInfo.name} — Full Stack Developer ·
           Algeria
         </span>
         <div className="flex items-center gap-2">
           <div className="w-[5px] h-[5px] rounded-full bg-[#22c55e] animate-[blink_2s_ease-in-out_infinite]" />
-          <span className="font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.14em] uppercase text-[#999]">
+          <span className="font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.14em] uppercase text-[var(--gray)]">
             Available for Work
           </span>
         </div>
