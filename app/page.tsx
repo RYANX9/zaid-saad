@@ -167,7 +167,7 @@ export default function HomePage() {
       </nav>
 
       {/* ── HERO ── */}
-      <section className="relative h-screen min-h-[700px] flex flex-col justify-end px-7 md:px-[52px] pb-[72px] overflow-hidden">
+      <section className="relative min-h-screen md:h-screen md:min-h-[700px] flex flex-col justify-end px-7 md:px-[52px] pb-[72px] overflow-hidden">
         {/* Atmospheric layer */}
         <div className="absolute inset-0 z-0">
           <div
@@ -186,12 +186,12 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Photo cluster */}
-        <div className="absolute top-8 right-5 w-[150px] h-[190px] sm:w-[190px] sm:h-[240px] md:top-[10%] md:right-[7%] md:w-[360px] md:h-[460px] lg:w-[420px] lg:h-[520px] z-[1]">
+        {/* Photo cluster — desktop only, floats top-right of the hero */}
+        <div className="hidden md:block absolute top-[10%] right-[7%] md:w-[360px] md:h-[460px] lg:w-[420px] lg:h-[520px] z-[1]">
           <div className="relative w-full h-full">
             {/* back layer — dotted texture, largest, offset bottom-right */}
             <div
-              className="absolute inset-0 translate-x-5 translate-y-6 md:translate-x-9 md:translate-y-11 -rotate-[6deg] rounded-[26px] md:rounded-[36px]"
+              className="absolute inset-0 translate-x-9 translate-y-11 -rotate-[6deg] rounded-[36px]"
               style={{
                 backgroundImage:
                   "radial-gradient(var(--gray) 1.3px, transparent 1.3px)",
@@ -200,16 +200,18 @@ export default function HomePage() {
               }}
             />
             {/* mid layer — solid accent, smallest, peeking top-left */}
-            <div className="absolute inset-3 md:inset-6 -translate-x-4 -translate-y-3 md:-translate-x-7 md:-translate-y-6 rotate-[9deg] rounded-[22px] md:rounded-[30px] bg-[var(--accent)]" />
+            <div className="absolute inset-6 -translate-x-7 -translate-y-6 rotate-[9deg] rounded-[30px] bg-[var(--accent)]" />
             {/* front layer — the actual photo */}
-            <div className="absolute inset-0 rotate-[-2deg] rounded-[26px] md:rounded-[36px] overflow-hidden border-[3px] border-[var(--white)]">
+            <div className="absolute inset-0 rotate-[-2deg] rounded-[36px] overflow-hidden border-[3px] border-[var(--white)]">
               <Image
                 src={personalInfo.photo}
                 alt={personalInfo.name}
                 fill
-                className="object-cover object-top grayscale contrast-105 brightness-90"
+                className="object-cover object-top contrast-[1.08] saturate-[1.2] brightness-[0.97]"
                 priority
               />
+              <div className="absolute inset-0 bg-[var(--accent)] mix-blend-multiply opacity-[0.16] pointer-events-none" />
+              <div className="absolute inset-0 bg-[var(--black)] mix-blend-color-burn opacity-[0.04] pointer-events-none" />
             </div>
           </div>
         </div>
@@ -229,13 +231,42 @@ export default function HomePage() {
             {personalInfo.tagline}
           </div>
           <h1
-            className="font-[family-name:var(--font-unbounded)] font-black leading-[0.92] tracking-[-0.03em] uppercase text-[var(--white)] mb-[52px]"
+            className="font-[family-name:var(--font-unbounded)] font-black leading-[0.92] tracking-[-0.03em] uppercase text-[var(--white)] mb-10 md:mb-[52px]"
             style={{ fontSize: "clamp(80px, 14.5vw, 210px)" }}
           >
             Zaid
             <br />
             Saad
           </h1>
+
+          {/* Photo cluster — mobile only, in flow after the name */}
+          <div className="md:hidden relative w-[190px] h-[240px] mx-auto mb-10">
+            {/* back layer — dotted texture, offset bottom-right */}
+            <div
+              className="absolute inset-0 translate-x-4 translate-y-5 -rotate-[6deg] rounded-[26px]"
+              style={{
+                backgroundImage:
+                  "radial-gradient(var(--gray) 1.3px, transparent 1.3px)",
+                backgroundSize: "9px 9px",
+                backgroundColor: "var(--black)",
+              }}
+            />
+            {/* mid layer — solid accent, peeking top-left */}
+            <div className="absolute inset-3 -translate-x-3 -translate-y-2 rotate-[9deg] rounded-[22px] bg-[var(--accent)]" />
+            {/* front layer — the actual photo */}
+            <div className="absolute inset-0 rotate-[-2deg] rounded-[26px] overflow-hidden border-[3px] border-[var(--white)]">
+              <Image
+                src={personalInfo.photo}
+                alt={personalInfo.name}
+                fill
+                className="object-cover object-top contrast-[1.08] saturate-[1.2] brightness-[0.97]"
+                priority
+              />
+              <div className="absolute inset-0 bg-[var(--accent)] mix-blend-multiply opacity-[0.16] pointer-events-none" />
+              <div className="absolute inset-0 bg-[var(--black)] mix-blend-color-burn opacity-[0.04] pointer-events-none" />
+            </div>
+          </div>
+
           <div className="flex items-end justify-between gap-12 flex-wrap">
             <p className="text-[14px] font-light leading-[1.8] text-[var(--gray)] max-w-[340px]">
               {personalInfo.heroDesc}
