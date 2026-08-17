@@ -167,7 +167,7 @@ export default function HomePage() {
       </nav>
 
       {/* ── HERO ── */}
-      <section className="relative min-h-screen md:h-screen md:min-h-[700px] flex flex-col justify-end px-7 md:px-[52px] pb-[72px] overflow-hidden">
+      <section className="relative min-h-screen md:h-screen md:min-h-[700px] flex flex-col justify-end px-7 md:px-[52px] pt-28 md:pt-0 pb-[72px] overflow-hidden">
         {/* Atmospheric layer */}
         <div className="absolute inset-0 z-0">
           <div
@@ -454,7 +454,7 @@ export default function HomePage() {
                 <Wrapper
                   key={p.id}
                   {...wrapperProps}
-                  className={`grid grid-cols-1 md:grid-cols-[64px_1fr_280px_120px] gap-10 items-start py-11 border-b border-[var(--white)]/[0.06] relative group cursor-none transition-all duration-[800ms] ${
+                  className={`grid grid-cols-1 md:grid-cols-[64px_150px_1fr_240px_110px] gap-8 md:gap-7 items-start py-11 border-b border-[var(--white)]/[0.06] relative group cursor-none transition-all duration-[800ms] ${
                     isVisible(`work-${i}`)
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-4"
@@ -468,6 +468,20 @@ export default function HomePage() {
                   <span className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.1em] text-[var(--gray)] pt-1 relative z-10 group-hover:text-[var(--white)] transition-colors">
                     {p.idx}
                   </span>
+                  <div className="relative z-10 w-full md:w-[150px] aspect-video rounded-2xl overflow-hidden border-2 border-[var(--gray)]/30 bg-[var(--dim)] shrink-0">
+                    {p.image ? (
+                      <Image
+                        src={p.image}
+                        alt={p.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.14em] uppercase text-[var(--gray)]">
+                        No Preview
+                      </div>
+                    )}
+                  </div>
                   <div className="relative z-10">
                     <div
                       className="font-[family-name:var(--font-unbounded)] font-bold leading-[1.0] tracking-[-0.02em] uppercase text-[var(--white)] mb-3.5 transition-all duration-300 group-hover:tracking-[-0.01em]"
