@@ -6,6 +6,7 @@ export interface Project {
   tags: string[];
   link: string | null;
   linkLabel: string;
+  image?: string;
 }
 
 export interface Skill {
@@ -68,6 +69,7 @@ export const projects: Project[] = [
     tags: ["Flutter", "Firebase", "Google Cloud"],
     link: "https://remp-8b15c.web.app/",
     linkLabel: "Live",
+    image: "",
   },
   {
     id: "urtec",
@@ -78,6 +80,7 @@ export const projects: Project[] = [
     tags: ["HTML/CSS/JS", "Firebase", "Cloudinary"],
     link: "https://urtec-26aab.web.app/",
     linkLabel: "Live",
+    image: "",
   },
   {
     id: "ewallet",
@@ -88,6 +91,7 @@ export const projects: Project[] = [
     tags: ["HTML/CSS/JS", "Firebase", "Analytics"],
     link: null,
     linkLabel: "Private",
+    image: "",
   },
   {
     id: "carrental",
@@ -98,6 +102,7 @@ export const projects: Project[] = [
     tags: ["Flutter", "Firebase", "Cloud Sync"],
     link: null,
     linkLabel: "Private",
+    image: "",
   },
 ];
 
