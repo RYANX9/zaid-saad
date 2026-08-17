@@ -35,6 +35,17 @@ export default function AdminPage() {
   const [socialForm, setSocialForm] = useState<SocialLink[]>([...socialLinks]);
   const [marqueeForm, setMarqueeForm] = useState(marqueeText);
   const [saved, setSaved] = useState(false);
+  const [isLight, setIsLight] = useState(false);
+
+  const toggleTheme = () => {
+    const newMode = !isLight;
+    setIsLight(newMode);
+    if (newMode) {
+      document.documentElement.classList.add("light");
+    } else {
+      document.documentElement.classList.remove("light");
+    }
+  };
 
   useEffect(() => {
     const auth = sessionStorage.getItem("admin-auth");
@@ -135,17 +146,17 @@ export default function AdminPage() {
 
   if (!authenticated) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
+      <div className="min-h-screen bg-[var(--black)] text-[var(--white)] flex items-center justify-center px-4">
         <form
           onSubmit={handleLogin}
-          className="w-full max-w-sm border border-white/[0.06] rounded-2xl p-8"
+          className="w-full max-w-sm border border-[var(--white)]/[0.06] rounded-2xl p-8"
         >
           <h1
-            className="font-[family-name:var(--font-unbounded)] font-light text-2xl mb-2"
+            className="font-[family-name:var(--font-unbounded)] font-black text-2xl mb-2"
           >
             Admin
           </h1>
-          <p className="text-[#999] text-sm mb-6 font-light">
+          <p className="text-[var(--gray)] text-sm mb-6 font-light">
             Enter password to manage portfolio content
           </p>
           <input
@@ -153,18 +164,18 @@ export default function AdminPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            className="w-full bg-transparent border border-white/[0.14] rounded-lg px-4 py-3 text-sm text-white placeholder:text-[#999] focus:outline-none focus:border-white/40 mb-4"
+            className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-4 py-3 text-sm text-[var(--white)] placeholder:text-[var(--gray)] focus:outline-none focus:border-[var(--accent)] mb-4"
           />
           <button
             type="submit"
-            className="w-full font-[family-name:var(--font-space-mono)] text-[11px] tracking-[0.14em] uppercase px-6 py-3 rounded-full border border-white text-white hover:bg-white hover:text-black transition-all"
+            className="w-full font-[family-name:var(--font-space-mono)] text-[11px] tracking-[0.14em] uppercase px-6 py-3 rounded-full border-2 border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)] hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all"
           >
             Enter
           </button>
           <button
             type="button"
             onClick={() => router.push("/")}
-            className="w-full mt-3 font-[family-name:var(--font-space-mono)] text-[11px] tracking-[0.14em] uppercase px-6 py-3 rounded-full border border-[#333] text-[#999] hover:border-white hover:text-white transition-all"
+            className="w-full mt-3 font-[family-name:var(--font-space-mono)] text-[11px] tracking-[0.14em] uppercase px-6 py-3 rounded-full border-2 border-[var(--gray)]/35 text-[var(--gray)] hover:border-[var(--white)] hover:text-[var(--white)] transition-all"
           >
             Back to Site
           </button>
@@ -174,22 +185,28 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-black border-b border-white/[0.06] px-6 md:px-10 py-4 flex justify-between items-center">
+      <header className="sticky top-0 z-50 bg-[var(--black)] border-b border-[var(--white)]/[0.06] px-6 md:px-10 py-4 flex justify-between items-center">
         <span className="font-[family-name:var(--font-space-mono)] text-[11px] tracking-[0.2em] uppercase">
           Z.S — Admin
         </span>
         <div className="flex items-center gap-4">
           <button
+            onClick={toggleTheme}
+            className="font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.18em] uppercase text-[var(--gray)] border border-[var(--gray)]/40 rounded-full px-4 py-[7px] hover:text-[var(--white)] hover:border-[var(--white)] transition-colors"
+          >
+            {isLight ? "Dark Mode" : "Light Mode"}
+          </button>
+          <button
             onClick={() => router.push("/")}
-            className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase text-[#999] hover:text-white transition-colors"
+            className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase text-[var(--gray)] hover:text-[var(--white)] transition-colors"
           >
             View Site
           </button>
           <button
             onClick={handleLogout}
-            className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase text-[#999] hover:text-white transition-colors"
+            className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase text-[var(--gray)] hover:text-[var(--white)] transition-colors"
           >
             Logout
           </button>
@@ -198,7 +215,7 @@ export default function AdminPage() {
 
       <div className="flex flex-col md:flex-row">
         {/* Sidebar */}
-        <aside className="w-full md:w-56 border-r border-white/[0.06] md:min-h-[calc(100vh-60px)]">
+        <aside className="w-full md:w-56 border-r border-[var(--white)]/[0.06] md:min-h-[calc(100vh-60px)]">
           <nav className="p-4 flex md:flex-col gap-1 overflow-x-auto md:overflow-visible">
             {[
               { key: "info", label: "Personal Info" },
@@ -213,8 +230,8 @@ export default function AdminPage() {
                 onClick={() => setActiveTab(tab.key as typeof activeTab)}
                 className={`text-left px-4 py-2.5 rounded-lg text-[11px] font-[family-name:var(--font-space-mono)] tracking-[0.1em] uppercase whitespace-nowrap transition-all ${
                   activeTab === tab.key
-                    ? "bg-white/10 text-white"
-                    : "text-[#999] hover:text-white"
+                    ? "bg-[var(--accent)]/15 text-[var(--accent)]"
+                    : "text-[var(--gray)] hover:text-[var(--white)]"
                 }`}
               >
                 {tab.label}
@@ -234,7 +251,7 @@ export default function AdminPage() {
           {/* PERSONAL INFO */}
           {activeTab === "info" && (
             <div className="space-y-6">
-              <h2 className="font-[family-name:var(--font-unbounded)] font-light text-xl mb-6">
+              <h2 className="font-[family-name:var(--font-unbounded)] font-black text-xl mb-6">
                 Personal Information
               </h2>
               {[
@@ -249,7 +266,7 @@ export default function AdminPage() {
                 { key: "photo", label: "Photo Path" },
               ].map((field) => (
                 <div key={field.key}>
-                  <label className="block font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[#999] mb-2">
+                  <label className="block font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[var(--gray)] mb-2">
                     {field.label}
                   </label>
                   <input
@@ -258,7 +275,7 @@ export default function AdminPage() {
                     onChange={(e) =>
                       setInfoForm({ ...infoForm, [field.key]: e.target.value })
                     }
-                    className="w-full bg-transparent border border-white/[0.14] rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-white/40"
+                    className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-4 py-2.5 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                   />
                 </div>
               ))}
@@ -269,9 +286,9 @@ export default function AdminPage() {
                   onChange={(e) =>
                     setInfoForm({ ...infoForm, available: e.target.checked })
                   }
-                  className="w-4 h-4 rounded border-white/20"
+                  className="w-4 h-4 rounded border-[var(--white)]/20"
                 />
-                <span className="text-sm text-[#999]">Available for work</span>
+                <span className="text-sm text-[var(--gray)]">Available for work</span>
               </div>
             </div>
           )}
@@ -279,12 +296,12 @@ export default function AdminPage() {
           {/* ABOUT & STATS */}
           {activeTab === "about" && (
             <div className="space-y-6">
-              <h2 className="font-[family-name:var(--font-unbounded)] font-light text-xl mb-6">
+              <h2 className="font-[family-name:var(--font-unbounded)] font-black text-xl mb-6">
                 About & Stats
               </h2>
 
               <div>
-                <label className="block font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[#999] mb-2">
+                <label className="block font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[var(--gray)] mb-2">
                   Headline
                 </label>
                 <input
@@ -293,12 +310,12 @@ export default function AdminPage() {
                   onChange={(e) =>
                     setAboutForm({ ...aboutForm, headline: e.target.value })
                   }
-                  className="w-full bg-transparent border border-white/[0.14] rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-white/40"
+                  className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-4 py-2.5 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                 />
               </div>
 
               <div>
-                <label className="block font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[#999] mb-2">
+                <label className="block font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[var(--gray)] mb-2">
                   Paragraphs (use {"<strong>"}text{"</strong>"} for bold)
                 </label>
                 {aboutForm.paragraphs.map((p, i) => (
@@ -311,13 +328,13 @@ export default function AdminPage() {
                       setAboutForm({ ...aboutForm, paragraphs: updated });
                     }}
                     rows={3}
-                    className="w-full bg-transparent border border-white/[0.14] rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-white/40 mb-2"
+                    className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-4 py-2.5 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)] mb-2"
                   />
                 ))}
               </div>
 
               <div>
-                <label className="block font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[#999] mb-2">
+                <label className="block font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[var(--gray)] mb-2">
                   Stats
                 </label>
                 {statsForm.map((s, i) => (
@@ -330,7 +347,7 @@ export default function AdminPage() {
                         updated[i] = { ...updated[i], num: e.target.value };
                         setStatsForm(updated);
                       }}
-                      className="w-20 bg-transparent border border-white/[0.14] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/40"
+                      className="w-20 bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                       placeholder="Num"
                     />
                     <input
@@ -341,7 +358,7 @@ export default function AdminPage() {
                         updated[i] = { ...updated[i], label: e.target.value };
                         setStatsForm(updated);
                       }}
-                      className="flex-1 bg-transparent border border-white/[0.14] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/40"
+                      className="flex-1 bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                       placeholder="Label"
                     />
                   </div>
@@ -349,14 +366,14 @@ export default function AdminPage() {
               </div>
 
               <div>
-                <label className="block font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[#999] mb-2">
+                <label className="block font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.2em] uppercase text-[var(--gray)] mb-2">
                   Marquee Text
                 </label>
                 <input
                   type="text"
                   value={marqueeForm}
                   onChange={(e) => setMarqueeForm(e.target.value)}
-                  className="w-full bg-transparent border border-white/[0.14] rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-white/40"
+                  className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-4 py-2.5 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                 />
               </div>
             </div>
@@ -366,12 +383,12 @@ export default function AdminPage() {
           {activeTab === "skills" && (
             <div className="space-y-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="font-[family-name:var(--font-unbounded)] font-light text-xl">
+                <h2 className="font-[family-name:var(--font-unbounded)] font-black text-xl">
                   Skills
                 </h2>
                 <button
                   onClick={addSkill}
-                  className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase px-4 py-2 rounded-full border border-white text-white hover:bg-white hover:text-black transition-all"
+                  className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase px-4 py-2 rounded-full border-2 border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)] hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all"
                 >
                   + Add
                 </button>
@@ -379,13 +396,13 @@ export default function AdminPage() {
               {skillsForm.map((sk, i) => (
                 <div
                   key={i}
-                  className="border border-white/[0.06] rounded-xl p-4 space-y-3"
+                  className="border border-[var(--white)]/[0.06] rounded-xl p-4 space-y-3"
                 >
                   <div className="flex justify-between">
-                    <span className="text-[#999] text-xs">Skill {i + 1}</span>
+                    <span className="text-[var(--gray)] text-xs">Skill {i + 1}</span>
                     <button
                       onClick={() => removeSkill(i)}
-                      className="text-[#999] hover:text-red-400 text-xs"
+                      className="text-[var(--gray)] hover:text-red-400 text-xs"
                     >
                       Remove
                     </button>
@@ -398,7 +415,7 @@ export default function AdminPage() {
                       updated[i] = { ...updated[i], name: e.target.value };
                       setSkillsForm(updated);
                     }}
-                    className="w-full bg-transparent border border-white/[0.14] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/40"
+                    className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                     placeholder="Skill name"
                   />
                   <div className="flex gap-3">
@@ -418,7 +435,7 @@ export default function AdminPage() {
                       }}
                       className="flex-1"
                     />
-                    <span className="text-[#999] text-xs w-12">
+                    <span className="text-[var(--gray)] text-xs w-12">
                       {Math.round(sk.width * 100)}%
                     </span>
                   </div>
@@ -430,7 +447,7 @@ export default function AdminPage() {
                       updated[i] = { ...updated[i], tag: e.target.value };
                       setSkillsForm(updated);
                     }}
-                    className="w-full bg-transparent border border-white/[0.14] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/40"
+                    className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                     placeholder="Tag (Active, Solid, Building...)"
                   />
                 </div>
@@ -442,12 +459,12 @@ export default function AdminPage() {
           {activeTab === "projects" && (
             <div className="space-y-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="font-[family-name:var(--font-unbounded)] font-light text-xl">
+                <h2 className="font-[family-name:var(--font-unbounded)] font-black text-xl">
                   Projects
                 </h2>
                 <button
                   onClick={addProject}
-                  className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase px-4 py-2 rounded-full border border-white text-white hover:bg-white hover:text-black transition-all"
+                  className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase px-4 py-2 rounded-full border-2 border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)] hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all"
                 >
                   + Add Project
                 </button>
@@ -455,15 +472,15 @@ export default function AdminPage() {
               {projectsForm.map((p, i) => (
                 <div
                   key={p.id}
-                  className="border border-white/[0.06] rounded-xl p-4 space-y-3"
+                  className="border border-[var(--white)]/[0.06] rounded-xl p-4 space-y-3"
                 >
                   <div className="flex justify-between items-center">
-                    <span className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.1em] text-[#999]">
+                    <span className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.1em] text-[var(--gray)]">
                       {p.idx}
                     </span>
                     <button
                       onClick={() => removeProject(i)}
-                      className="text-[#999] hover:text-red-400 text-xs"
+                      className="text-[var(--gray)] hover:text-red-400 text-xs"
                     >
                       Remove
                     </button>
@@ -474,7 +491,7 @@ export default function AdminPage() {
                     onChange={(e) =>
                       updateProject(i, "title", e.target.value)
                     }
-                    className="w-full bg-transparent border border-white/[0.14] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/40"
+                    className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                     placeholder="Title"
                   />
                   <textarea
@@ -483,7 +500,7 @@ export default function AdminPage() {
                       updateProject(i, "description", e.target.value)
                     }
                     rows={3}
-                    className="w-full bg-transparent border border-white/[0.14] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/40"
+                    className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                     placeholder="Description"
                   />
                   <input
@@ -496,7 +513,7 @@ export default function AdminPage() {
                         e.target.value.split(",").map((t) => t.trim())
                       )
                     }
-                    className="w-full bg-transparent border border-white/[0.14] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/40"
+                    className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                     placeholder="Tags (comma separated)"
                   />
                   <div className="flex gap-3">
@@ -510,7 +527,7 @@ export default function AdminPage() {
                           e.target.value || null
                         )
                       }
-                      className="flex-1 bg-transparent border border-white/[0.14] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/40"
+                      className="flex-1 bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                       placeholder="Link URL (empty = private)"
                     />
                     <input
@@ -519,7 +536,7 @@ export default function AdminPage() {
                       onChange={(e) =>
                         updateProject(i, "linkLabel", e.target.value)
                       }
-                      className="w-24 bg-transparent border border-white/[0.14] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/40"
+                      className="w-24 bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                       placeholder="Label"
                     />
                   </div>
@@ -532,12 +549,12 @@ export default function AdminPage() {
           {activeTab === "social" && (
             <div className="space-y-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="font-[family-name:var(--font-unbounded)] font-light text-xl">
+                <h2 className="font-[family-name:var(--font-unbounded)] font-black text-xl">
                   Social Links
                 </h2>
                 <button
                   onClick={addSocial}
-                  className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase px-4 py-2 rounded-full border border-white text-white hover:bg-white hover:text-black transition-all"
+                  className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase px-4 py-2 rounded-full border-2 border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)] hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all"
                 >
                   + Add
                 </button>
@@ -545,13 +562,13 @@ export default function AdminPage() {
               {socialForm.map((link, i) => (
                 <div
                   key={i}
-                  className="border border-white/[0.06] rounded-xl p-4 space-y-3"
+                  className="border border-[var(--white)]/[0.06] rounded-xl p-4 space-y-3"
                 >
                   <div className="flex justify-between">
-                    <span className="text-[#999] text-xs">Link {i + 1}</span>
+                    <span className="text-[var(--gray)] text-xs">Link {i + 1}</span>
                     <button
                       onClick={() => removeSocial(i)}
-                      className="text-[#999] hover:text-red-400 text-xs"
+                      className="text-[var(--gray)] hover:text-red-400 text-xs"
                     >
                       Remove
                     </button>
@@ -564,7 +581,7 @@ export default function AdminPage() {
                       updated[i] = { ...updated[i], name: e.target.value };
                       setSocialForm(updated);
                     }}
-                    className="w-full bg-transparent border border-white/[0.14] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/40"
+                    className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                     placeholder="Name"
                   />
                   <input
@@ -575,7 +592,7 @@ export default function AdminPage() {
                       updated[i] = { ...updated[i], url: e.target.value };
                       setSocialForm(updated);
                     }}
-                    className="w-full bg-transparent border border-white/[0.14] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/40"
+                    className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                     placeholder="URL"
                   />
                   <input
@@ -586,7 +603,7 @@ export default function AdminPage() {
                       updated[i] = { ...updated[i], label: e.target.value };
                       setSocialForm(updated);
                     }}
-                    className="w-20 bg-transparent border border-white/[0.14] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-white/40"
+                    className="w-20 bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                     placeholder="Label"
                   />
                 </div>
@@ -597,12 +614,12 @@ export default function AdminPage() {
           {/* EXPORT */}
           {activeTab === "export" && (
             <div className="space-y-6">
-              <h2 className="font-[family-name:var(--font-unbounded)] font-light text-xl mb-6">
+              <h2 className="font-[family-name:var(--font-unbounded)] font-black text-xl mb-6">
                 Export Data
               </h2>
-              <p className="text-[#999] text-sm mb-6">
+              <p className="text-[var(--gray)] text-sm mb-6">
                 Export your changes as JSON. Copy this data into your{" "}
-                <code className="text-white bg-white/10 px-1.5 py-0.5 rounded">
+                <code className="text-[var(--white)] bg-[var(--white)]/10 px-1.5 py-0.5 rounded">
                   data.ts
                 </code>{" "}
                 file to update the portfolio.
@@ -610,18 +627,18 @@ export default function AdminPage() {
               <div className="flex gap-3 mb-4">
                 <button
                   onClick={exportData}
-                  className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase px-6 py-3 rounded-full border border-white text-white hover:bg-white hover:text-black transition-all"
+                  className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase px-6 py-3 rounded-full border-2 border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)] hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all"
                 >
                   Download JSON
                 </button>
                 <button
                   onClick={copyData}
-                  className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase px-6 py-3 rounded-full border border-[#333] text-[#999] hover:border-white hover:text-white transition-all"
+                  className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase px-6 py-3 rounded-full border-2 border-[var(--gray)]/35 text-[var(--gray)] hover:border-[var(--white)] hover:text-[var(--white)] transition-all"
                 >
                   Copy to Clipboard
                 </button>
               </div>
-              <pre className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4 text-xs text-[#999] overflow-auto max-h-96">
+              <pre className="bg-[var(--white)]/[0.03] border border-[var(--white)]/[0.06] rounded-xl p-4 text-xs text-[var(--gray)] overflow-auto max-h-96">
                 {JSON.stringify(
                   {
                     personalInfo: infoForm,
