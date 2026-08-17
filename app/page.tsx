@@ -186,28 +186,32 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Photo */}
-        <div className="absolute top-0 right-0 w-full md:w-[52%] h-full z-[1] overflow-hidden">
-          <div
-            className="absolute inset-0 z-[2]"
-            style={{
-              background:
-                "linear-gradient(95deg, var(--black) 0%, transparent 30%)",
-            }}
-          />
-          <div
-            className="absolute bottom-0 left-0 right-0 h-[45%] z-[2]"
-            style={{
-              background: "linear-gradient(transparent, var(--black))",
-            }}
-          />
-          <Image
-            src={personalInfo.photo}
-            alt={personalInfo.name}
-            fill
-            className="object-cover object-top grayscale contrast-105 brightness-90 opacity-30 md:opacity-100"
-            priority
-          />
+        {/* Photo cluster */}
+        <div className="absolute top-8 right-5 w-[150px] h-[190px] sm:w-[190px] sm:h-[240px] md:top-[10%] md:right-[7%] md:w-[360px] md:h-[460px] lg:w-[420px] lg:h-[520px] z-[1]">
+          <div className="relative w-full h-full">
+            {/* back layer — dotted texture, largest, offset bottom-right */}
+            <div
+              className="absolute inset-0 translate-x-5 translate-y-6 md:translate-x-9 md:translate-y-11 -rotate-[6deg] rounded-[26px] md:rounded-[36px]"
+              style={{
+                backgroundImage:
+                  "radial-gradient(var(--gray) 1.3px, transparent 1.3px)",
+                backgroundSize: "9px 9px",
+                backgroundColor: "var(--black)",
+              }}
+            />
+            {/* mid layer — solid accent, smallest, peeking top-left */}
+            <div className="absolute inset-3 md:inset-6 -translate-x-4 -translate-y-3 md:-translate-x-7 md:-translate-y-6 rotate-[9deg] rounded-[22px] md:rounded-[30px] bg-[var(--accent)]" />
+            {/* front layer — the actual photo */}
+            <div className="absolute inset-0 rotate-[-2deg] rounded-[26px] md:rounded-[36px] overflow-hidden border-[3px] border-[var(--white)]">
+              <Image
+                src={personalInfo.photo}
+                alt={personalInfo.name}
+                fill
+                className="object-cover object-top grayscale contrast-105 brightness-90"
+                priority
+              />
+            </div>
+          </div>
         </div>
 
         {/* Content */}
