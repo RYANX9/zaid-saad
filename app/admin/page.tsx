@@ -494,6 +494,30 @@ export default function AdminPage() {
                     className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
                     placeholder="Title"
                   />
+                  <div className="flex gap-3 items-start">
+                    <input
+                      type="text"
+                      value={p.image || ""}
+                      onChange={(e) =>
+                        updateProject(i, "image", e.target.value)
+                      }
+                      className="flex-1 bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
+                      placeholder="Image path (e.g. /projects/remp.png)"
+                    />
+                    <div className="relative w-24 aspect-video rounded-lg overflow-hidden border border-[var(--white)]/[0.14] bg-[var(--dim)] shrink-0">
+                      {p.image ? (
+                        <img
+                          src={p.image}
+                          alt=""
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-[8px] tracking-[0.1em] uppercase text-[var(--gray)]">
+                          No Preview
+                        </div>
+                      )}
+                    </div>
+                  </div>
                   <textarea
                     value={p.description}
                     onChange={(e) =>
