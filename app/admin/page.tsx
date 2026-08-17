@@ -17,6 +17,7 @@ import {
 
 // Simple auth - in production use proper auth
 const ADMIN_PASSWORD = "zaid2025";
+const DRAFT_KEY = "admin-draft-v1";
 
 export default function AdminPage() {
   const router = useRouter();
@@ -51,6 +52,46 @@ export default function AdminPage() {
     const auth = sessionStorage.getItem("admin-auth");
     if (auth === "true") setAuthenticated(true);
   }, []);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(DRAFT_KEY);
+      if (!raw) return;
+      const draft = JSON.parse(raw);
+      if (draft.personalInfo) setInfoForm(draft.personalInfo);
+      if (draft.stats) setStatsForm(draft.stats);
+      if (draft.aboutContent) setAboutForm(draft.aboutContent);
+      if (draft.skills) setSkillsForm(draft.skills);
+      if (draft.projects) setProjectsForm(draft.projects);
+      if (draft.socialLinks) setSocialForm(draft.socialLinks);
+      if (draft.marqueeText !== undefined) setMarqueeForm(draft.marqueeText);
+    } catch {
+      // ignore corrupted draft
+    }
+  }, []);
+
+  useEffect(() => {
+    const draft = {
+      personalInfo: infoForm,
+      stats: statsForm,
+      aboutContent: aboutForm,
+      skills: skillsForm,
+      projects: projectsForm,
+      socialLinks: socialForm,
+      marqueeText: marqueeForm,
+    };
+    try {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+    } catch {
+      // storage full or unavailable — edits still work, just won't survive refresh
+    }
+  }, [infoForm, statsForm, aboutForm, skillsForm, projectsForm, socialForm, marqueeForm]);
+
+  const handleResetDraft = () => {
+    if (!confirm("Discard local draft and reload the published content?")) return;
+    localStorage.removeItem(DRAFT_KEY);
+    window.location.reload();
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -214,6 +255,12 @@ export default function AdminPage() {
             className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase px-5 py-2 rounded-full border-2 border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)] hover:bg-transparent hover:text-[var(--white)] transition-colors"
           >
             {saved ? "Copied — paste into data.ts" : "Save"}
+          </button>
+          <button
+            onClick={handleResetDraft}
+            className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase text-[var(--gray)] hover:text-[var(--white)] transition-colors"
+          >
+            Reset
           </button>
           <button
             onClick={handleLogout}
