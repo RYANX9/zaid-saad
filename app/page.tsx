@@ -449,12 +449,15 @@ export default function HomePage() {
                     rel: "noreferrer",
                   }
                 : {};
-
               return (
                 <Wrapper
                   key={p.id}
                   {...wrapperProps}
-                  className={`grid grid-cols-1 md:grid-cols-[64px_150px_1fr_240px_110px] gap-8 md:gap-7 items-start py-11 border-b border-[var(--white)]/[0.06] relative group cursor-none transition-all duration-[800ms] ${
+                  className={`grid grid-cols-1 ${
+                    p.image
+                      ? "md:grid-cols-[64px_150px_1fr_240px_110px]"
+                      : "md:grid-cols-[64px_1fr_240px_110px]"
+                  } gap-8 md:gap-7 items-start py-11 border-b border-[var(--white)]/[0.06] relative group cursor-none transition-all duration-[800ms] ${
                     isVisible(`work-${i}`)
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-4"
@@ -465,24 +468,20 @@ export default function HomePage() {
                   onMouseLeave={() => setCursorHover(false)}
                 >
                   <div className="absolute inset-0 -mx-7 md:-mx-[52px] bg-[var(--white)]/[0.025] opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none" />
-                  <span className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.1em] text-[var(--gray)] pt-1 relative z-10 group-hover:text-[var(--white)] transition-colors">
+                  <span className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.1em] text-[var(--gray)] pt-1 relative z-10 md:col-start-1 group-hover:text-[var(--white)] transition-colors">
                     {p.idx}
                   </span>
-                  <div className="relative z-10 w-full md:w-[150px] aspect-video rounded-2xl overflow-hidden border-2 border-[var(--gray)]/30 bg-[var(--dim)] shrink-0">
-                    {p.image ? (
+                  {p.image && (
+                    <div className="relative z-10 w-full md:w-[150px] md:col-start-2 aspect-video rounded-2xl overflow-hidden border-2 border-[var(--gray)]/30 bg-[var(--dim)] shrink-0">
                       <Image
                         src={p.image}
                         alt={p.title}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                       />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.14em] uppercase text-[var(--gray)]">
-                        No Preview
-                      </div>
-                    )}
-                  </div>
-                  <div className="relative z-10">
+                    </div>
+                  )}
+                  <div className="relative z-10 md:col-start-3">
                     <div
                       className="font-[family-name:var(--font-unbounded)] font-bold leading-[1.0] tracking-[-0.02em] uppercase text-[var(--white)] mb-3.5 transition-all duration-300 group-hover:tracking-[-0.01em]"
                       style={{ fontSize: "clamp(20px, 2.6vw, 38px)" }}
@@ -493,7 +492,7 @@ export default function HomePage() {
                       {p.description}
                     </p>
                   </div>
-                  <div className="flex flex-col gap-[7px] pt-1 relative z-10">
+                  <div className="flex flex-col gap-[7px] pt-1 relative z-10 md:col-start-4">
                     {p.tags.map((t) => (
                       <span
                         key={t}
@@ -504,7 +503,7 @@ export default function HomePage() {
                     ))}
                   </div>
                   <div
-                    className={`font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.16em] uppercase pt-1 flex items-center gap-2 relative z-10 transition-all duration-200 ${
+                    className={`font-[family-name:var(--font-space-mono)] text-[9px] tracking-[0.16em] uppercase pt-1 flex items-center gap-2 relative z-10 md:col-start-5 transition-all duration-200 ${
                       p.link
                         ? "text-[var(--gray)] group-hover:text-[var(--white)]"
                         : "text-[var(--gray)]/30"
