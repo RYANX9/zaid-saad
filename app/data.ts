@@ -80,7 +80,7 @@ export const projects: Project[] = [
     tags: ["HTML/CSS/JS", "Firebase", "Cloudinary"],
     link: "https://urtec-26aab.web.app/",
     linkLabel: "Live",
-    image: "",
+    image: "projects/project2.jpeg",
   },
   {
     id: "ewallet",
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     tags: ["HTML/CSS/JS", "Firebase", "Analytics"],
     link: null,
     linkLabel: "Private",
-    image: "",
+    image: "projects/project3.jpg",
   },
   {
     id: "carrental",
@@ -102,7 +102,7 @@ export const projects: Project[] = [
     tags: ["Flutter", "Firebase", "Cloud Sync"],
     link: null,
     linkLabel: "Private",
-    image: "",
+    image: "projects/project4.jpg",
   },
 ];
 
