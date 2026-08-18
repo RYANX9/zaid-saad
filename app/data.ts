@@ -37,7 +37,7 @@ export const personalInfo = {
 
 export const stats = [
   {
-    "num": "5",
+    "num": "3",
     "label": "Live Products"
   },
   {
@@ -100,7 +100,7 @@ export const projects: Project[] = [
     ],
     "link": "https://remp-8b15c.web.app/",
     "linkLabel": "Live",
-    "image": "/projects/project1.jpeg"
+    "image": "/projects/remp-1787048533524.jpg"
   },
   {
     "id": "urtec",
