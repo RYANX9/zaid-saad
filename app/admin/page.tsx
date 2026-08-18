@@ -37,6 +37,10 @@ export default function AdminPage() {
   const [marqueeForm, setMarqueeForm] = useState(marqueeText);
   const [saved, setSaved] = useState(false);
   const [isLight, setIsLight] = useState(false);
+  const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
+  const [publishStatus, setPublishStatus] = useState<
+    "idle" | "saving" | "saved" | "error"
+  >("idle");
 
   const toggleTheme = () => {
     const newMode = !isLight;
@@ -108,8 +112,60 @@ export default function AdminPage() {
     sessionStorage.removeItem("admin-auth");
   };
 
-  const handleSave = () => {
-    copyData();
+  const handlePublish = async () => {
+    setPublishStatus("saving");
+    try {
+      const res = await fetch("/api/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          personalInfo: infoForm,
+          stats: statsForm,
+          aboutContent: aboutForm,
+          skills: skillsForm,
+          projects: projectsForm,
+          socialLinks: socialForm,
+          marqueeText: marqueeForm,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || "Publish failed");
+      setPublishStatus("saved");
+      setTimeout(() => setPublishStatus("idle"), 4000);
+    } catch (err) {
+      setPublishStatus("error");
+      alert(err instanceof Error ? err.message : "Publish failed");
+      setTimeout(() => setPublishStatus("idle"), 4000);
+    }
+  };
+
+  const handleImageUpload = async (i: number, file: File) => {
+    setUploadingIndex(i);
+    try {
+      const base64 = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve((reader.result as string).split(",")[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          filename: file.name,
+          content: base64,
+          projectId: projectsForm[i].id,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || "Upload failed");
+      updateProject(i, "image", data.path);
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setUploadingIndex(null);
+    }
   };
 
   const exportData = () => {
@@ -251,10 +307,17 @@ export default function AdminPage() {
             View Site
           </button>
           <button
-            onClick={handleSave}
-            className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase px-5 py-2 rounded-full border-2 border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)] hover:bg-transparent hover:text-[var(--white)] transition-colors"
+            onClick={handlePublish}
+            disabled={publishStatus === "saving"}
+            className="font-[family-name:var(--font-space-mono)] text-[10px] tracking-[0.14em] uppercase px-5 py-2 rounded-full border-2 border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)] hover:bg-transparent hover:text-[var(--white)] disabled:opacity-50 transition-colors"
           >
-            {saved ? "Copied — paste into data.ts" : "Save"}
+            {publishStatus === "saving"
+              ? "Publishing…"
+              : publishStatus === "saved"
+              ? "Published"
+              : publishStatus === "error"
+              ? "Error — retry"
+              : "Publish"}
           </button>
           <button
             onClick={handleResetDraft}
@@ -554,22 +617,28 @@ export default function AdminPage() {
                   />
                   <div className="flex gap-3 items-start">
                     <div className="flex-1 space-y-2">
-                      <input
-                        type="text"
-                        value={p.image || ""}
-                        onChange={(e) =>
-                          updateProject(i, "image", e.target.value)
-                        }
-                        className="w-full bg-transparent border border-[var(--white)]/[0.14] rounded-lg px-3 py-2 text-sm text-[var(--white)] focus:outline-none focus:border-[var(--accent)]"
-                        placeholder="Image path (e.g. /projects/remp.png)"
-                      />
-                      <p className="text-[10px] text-[var(--gray)]">
-                        Upload the file to{" "}
-                        <span className="text-[var(--white)]">
-                          public/projects
-                        </span>{" "}
-                        on GitHub, then paste the path here.
-                      </p>
+                      <label className="flex items-center justify-center gap-2 border-2 border-dashed border-[var(--gray)]/35 rounded-lg px-3 py-2.5 text-[11px] tracking-[0.08em] uppercase text-[var(--gray)] cursor-pointer hover:border-[var(--accent)] hover:text-[var(--white)] transition-colors">
+                        {uploadingIndex === i ? "Uploading…" : "Upload Image"}
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          disabled={uploadingIndex !== null}
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) handleImageUpload(i, file);
+                            e.target.value = "";
+                          }}
+                        />
+                      </label>
+                      {p.image && (
+                        <button
+                          onClick={() => updateProject(i, "image", "")}
+                          className="text-[10px] tracking-[0.08em] uppercase text-[var(--gray)] hover:text-[var(--white)] transition-colors"
+                        >
+                          Remove image
+                        </button>
+                      )}
                     </div>
                     <div className="relative w-24 aspect-video rounded-lg overflow-hidden border border-[var(--white)]/[0.14] bg-[var(--dim)] shrink-0">
                       {p.image ? (
