@@ -69,7 +69,7 @@ export const projects: Project[] = [
     tags: ["Flutter", "Firebase", "Google Cloud"],
     link: "https://remp-8b15c.web.app/",
     linkLabel: "Live",
-    image: "project1.jpeg",
+    image: "public/projects/project1.jpeg",
   },
   {
     id: "urtec",
