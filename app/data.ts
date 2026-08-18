@@ -100,7 +100,7 @@ export const projects: Project[] = [
     ],
     "link": "https://remp-8b15c.web.app/",
     "linkLabel": "Live",
-    "image": "projects/project1.jpeg"
+    "image": "/projects/remp-1787048466399.jpg"
   },
   {
     "id": "urtec",
