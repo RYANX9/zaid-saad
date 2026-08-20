@@ -29,7 +29,7 @@ export const personalInfo = {
   "phone": "+213 552 896 422",
   "whatsapp": "https://wa.me/213552896422",
   "github": "https://github.com/saadzayd",
-  "linkedin": "#",
+  "linkedin": "https://www.linkedin.com/in/zaid-saad-472255390/",
   "photo": "/pic.png",
   "available": true,
   "year": 2025
