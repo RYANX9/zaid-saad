@@ -127,7 +127,7 @@ export const projects: Project[] = [
       "Analytics"
     ],
     "link": "https://github.com/saadzayd/e-wallet",
-    "linkLabel": "Private",
+    "linkLabel": "Live",
     "image": "projects/project3.jpg"
   },
   {
@@ -141,7 +141,7 @@ export const projects: Project[] = [
       "Cloud Sync"
     ],
     "link": "https://github.com/saadzayd/car-rent",
-    "linkLabel": "Private",
+    "linkLabel": "Live",
     "image": "projects/project4.jpg"
   }
 ];
