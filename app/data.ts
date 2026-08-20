@@ -126,7 +126,7 @@ export const projects: Project[] = [
       "Firebase",
       "Analytics"
     ],
-    "link": null,
+    "link": "https://github.com/saadzayd/e-wallet",
     "linkLabel": "Private",
     "image": "projects/project3.jpg"
   },
@@ -140,7 +140,7 @@ export const projects: Project[] = [
       "Firebase",
       "Cloud Sync"
     ],
-    "link": null,
+    "link": "https://github.com/saadzayd/car-rent",
     "linkLabel": "Private",
     "image": "projects/project4.jpg"
   }
